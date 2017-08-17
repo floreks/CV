@@ -1,0 +1,7 @@
+# Ignore IntelliJ files
+.idea
+*.iml
+
+# Other files
+auxil/
+out/
