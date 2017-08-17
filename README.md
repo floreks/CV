@@ -1,12 +1,8 @@
 # CV
 
-<div>
-  <a href="https://circleci.com/gh/posquit0/Awesome-CV">
-    <img alt="TravisCI" src="https://circleci.com/gh/posquit0/Awesome-CV.svg?style=shield" />
-  </a>
-  <a href="">
-    <img alt="Example CV" src="https://img.shields.io/badge/cv-pdf-green.svg" />
-  </a>
-</div>
+[![Build Status](https://travis-ci.org/floreks/CV.svg?branch=master)](https://travis-ci.org/floreks/CV)
+<a href="">
+  <img alt="Example CV" src="https://img.shields.io/badge/cv-pdf-green.svg" />
+</a>
 
 ###### Based on [Awesome CV](https://github.com/posquit0/Awesome-CV).
