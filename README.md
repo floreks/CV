@@ -1,6 +1,6 @@
 # CV
 
-<div align="center">
+<div>
   <a href="https://circleci.com/gh/posquit0/Awesome-CV">
     <img alt="TravisCI" src="https://circleci.com/gh/posquit0/Awesome-CV.svg?style=shield" />
   </a>
