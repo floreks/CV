@@ -2,14 +2,25 @@ dist: trusty
 sudo: required
 
 services:
-- docker
+  - docker
+
+env:
+  global:
+    - CACHE_DIR=$HOME/.cache/docker
+    - CACHE_FILE_TEX=$CACHE_DIR/tex.tar.gz
+
+cache:
+  directories:
+  - $CACHE_DIR
 
 before_install:
-- docker pull harshjv/texlive-2015
+  - if [ -f ${CACHE_FILE_TEX} ]; then gunzip -c ${CACHE_FILE_TEX} | docker load; fi
 
 script:
-- cd src
-- docker run --rm -it -v $(pwd):/var/texlive harshjv/texlive-2015 xelatex cv.tex
+  - cd src
+  - docker run --rm -it -v $(pwd):/var/texlive harshjv/texlive-2015 xelatex cv.tex
+  - mkdir -p $CACHE_DIR
+  - if [ ! -f ${CACHE_FILE_TEX} ]; then docker save harshjv/texlive-2015 | gzip > ${CACHE_FILE_TEX}; fi
 
 deploy:
   provider: releases
@@ -17,4 +28,4 @@ deploy:
     secure: EZW0OjOJCvmIf9r2NzY7Bq4fPY9Qbo0hMOpnHJX1awP+9ys4Z9RCdJ5rCeJIj22B2Sn6T1tEwLjYDl9KGLc719WvCzLYotvnNf7mWY/y5b0UG6Rl7hri48cR1klLJUIe6iboFF/ZdffIJjNGie4/bhvjwI5NaZifAd8DdaeU+T1eLOn7Lix4hs9eZInfYsjQOXm341bi/dqJ8gp8eLeeVbl/cA35f9IvZuLUds/bRHqS5GDy8e/FokskGqBKRt3Ws4lVvOGSwzo5l3DazdhwiWje/1cObtxS7dF6wro5I313Fjk7thKvVmhATlexMOZ7tgO+8JHRPZST9h7SKfW1X6GR0izSfZzPNmaYHWDzKBU3B/Q51CuwS8696ZvXLb8k15MlXdak2vmANDP5k83lTu63XBCoyFPxS5/pK0CuKwd70x5RMIg2PqOJu0jCLibxwpSX6XtrE/nH2GJYeED9OtSQDuvhc/XVySbGWgUfyfeuRvgWfCa0lli7Y+tQbL23PFyZv7K4DNxBBzKr0JycTmIUhFv37gHGAUaijC+VxTBvOjFl7Uq5FxhxfKzYrszG3zkx17EcRTBj6C1yZDKHT1u6LdcaJ3D2lEjax6CkSesDQ6PPiNqMLCD1t2TTHzfab2gF0Ns/uhN/AEEyR03o0PHSPEKLOftGXxHMH3BRWwo=
   file: cv.pdf
   on:
-    repo: floreks/CV
+    tags: true
