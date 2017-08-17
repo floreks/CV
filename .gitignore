@@ -5,3 +5,6 @@
 # Other files
 auxil/
 out/
+*.aux
+*.log
+*.out
